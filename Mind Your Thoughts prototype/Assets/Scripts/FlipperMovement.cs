@@ -10,6 +10,10 @@ public class FlipperMovement : MonoBehaviour
     [SerializeField] private Transform _transform;
     [SerializeField] private float _FlipperSpeed;
     [SerializeField] private float _FlipperAmount;
+        [SerializeField] private float _FlipAngleEnd;
+                [SerializeField] private float _FlipAngleStart;
+        [SerializeField] private bool _IsFlipping;
+                [SerializeField] private float _ReverseMultiplier;
 
     [SerializeField] private PlayerInput _InputActions;
 
@@ -28,12 +32,28 @@ public class FlipperMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown("W"))
+        
+        if(_IsFlipping && _FlipperAmount * _ReverseMultiplier< _FlipAngleEnd)
         {
-            _FlipperAmount += _FlipperSpeed * Time.deltaTime; 
+                    // Rotates the flippers
+         _FlipperAmount += _FlipperSpeed * Time.deltaTime ; 
         _transform.localRotation = Quaternion.Euler(0, 0, _FlipperAmount);
         }
-        // Rotates the flippers
+        else if (_FlipperAmount * _ReverseMultiplier> _FlipAngleStart)
+        {
+                        _IsFlipping = false;
+            _FlipperAmount -= _FlipperSpeed * Time.deltaTime; 
+        _transform.localRotation = Quaternion.Euler(0, 0, _FlipperAmount);
+        }
+        else
+        {
+            _FlipperAmount = 0;
+        }
        
+    }
+
+    public void flipperMove()
+    {
+        _IsFlipping = true;
     }
 }

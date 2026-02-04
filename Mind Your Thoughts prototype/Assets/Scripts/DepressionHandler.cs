@@ -7,6 +7,8 @@ public class DepressionHandler : MonoBehaviour
 {
     [SerializeField] private float _TimeTillDepressed;
     [SerializeField] private float _TimeTillDestroyed;
+    [SerializeField] private float _DepressionTimerMin;
+    [SerializeField] private float _DepressionTimerMax;
     [SerializeField] private bool _IsDepressed;
     [SerializeField] private bool _Hurt;
     [SerializeField] private Material _depressedMaterial;
@@ -19,7 +21,7 @@ public class DepressionHandler : MonoBehaviour
         _IsDepressed = false;
         _Hurt = false;
 
-        _TimeTillDepressed = Random.Range(10f, 50f);
+        _TimeTillDepressed = Random.Range(_DepressionTimerMin, _DepressionTimerMax);
     }
 
     // Update is called once per frame
