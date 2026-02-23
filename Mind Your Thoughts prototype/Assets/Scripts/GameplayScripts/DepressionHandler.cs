@@ -10,12 +10,12 @@ public class DepressionHandler : MonoBehaviour
     [SerializeField] private float _DepressionTimerMin;
     [SerializeField] private float _DepressionTimerMax;
     [SerializeField] private bool _IsDepressed;
-    [SerializeField] private bool _Hurt;
+    [SerializeField] internal bool _Hurt;
     [SerializeField] private Material _depressedMaterial;
     [SerializeField] private Rigidbody2D _rigidbody;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         // starts all bools as false
         _IsDepressed = false;

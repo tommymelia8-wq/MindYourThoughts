@@ -17,18 +17,21 @@ public class FlipperMovement : MonoBehaviour
     [SerializeField] private bool _IsFlipping;
     [SerializeField] private float _ReverseMultiplier;
 
+    //Player Input
     [SerializeField] private PlayerInput _InputActions;
+    [SerializeField] private InputActionReference _flipAction;
 
-    void Awake()
+    //When the correct  input is recieved, use flipper move
+    private void OnEnable()
     {
-        // this allows the script to interact with the playerinput asset
-        _InputActions = new PlayerInput();
-
+        _flipAction.action.Enable();
+        _flipAction.action.performed += flipperMove;
     }
    
     // Update is called once per frame
     void Update()
     {
+
         //"_IsFlipping" checks if the player has pressed the button, "_FlipperAmount" is used to store the angle of the flipper, 
         // "_ReverseMultiplier" is so that one flipper can rotate clockwise and one can go anti-clockwise with one script, 
         // "_FlipAngleEnd" means that the flipper has a spot to hit and then it will stop rotating
@@ -59,7 +62,7 @@ public class FlipperMovement : MonoBehaviour
     }
 
     // Method which allows the unity button objects to work the flipper 
-    public void flipperMove()
+    public void flipperMove(InputAction.CallbackContext context)
     {
         _IsFlipping = true;
     }
